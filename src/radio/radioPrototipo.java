@@ -78,11 +78,11 @@ public class radioPrototipo implements Radio {
     public String guardar(int boton) {
         if(frecuencia == false){
             botones[boton-1] = emisoraFM;
-             return "Se ha guardado la emisora: " + emisoraFM + " en el boton: #"+ (boton-1);
+             return "Se ha guardado la emisora: " + emisoraFM + " en el boton: #"+ (boton);
         }
         else{
             botones[boton-1] = emisoraAM;
-            return "Se ha guardado la emisora: " + emisoraAM + " en el boton: #"+ (boton-1);
+            return "Se ha guardado la emisora: " + emisoraAM + " en el boton: #"+ (boton);
         }
        
     }
