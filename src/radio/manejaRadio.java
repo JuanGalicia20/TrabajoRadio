@@ -5,6 +5,8 @@
  */
 package radio;
 
+import java.io.Console;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 
 /**
@@ -34,32 +36,38 @@ public class manejaRadio {
      */
     public static void main(String[] args) {
        radio1 = new radioPrototipo();
+       boolean estado = radio1.encenderApagar();
+       boolean frecuencia = radio1.amFm();
+       DecimalFormat df = new DecimalFormat("###.##");
         
        boolean keep = true;
        while (keep == true){ 
             System.out.print("-----------------Radio-----------------"
                         +"\n 1. Encender radio."+
                         "\n 2. Cambiar AM a FM o FM a AM."+
-                        "\n 3. Avanzar en el dial delas emisoras."+
+                        "\n 3. Avanzar en el dial de 3las emisoras."+
                         "\n 4. Guardar una emisora en uno de los 12 botones."+
                         "\n 5. Seleccionar la emisora puesta en un botón."+
                         "\n 6. Apagar Radio. "+
                         "\n 7. Salir"+
                         "\n----------------------------------------\n");
             String ingreso = JOptionPane.showInputDialog("Ingrese la opcion del menu que desee realizar: ");
-            if(radio1.isEstadoRadio() == false && !"1".equals(ingreso)){
+            if(estado == false && !"1".equals(ingreso) && !"7".equals(ingreso)){
                 System.out.println("Debes encender la radio antes de realizar una acción");
+            }
+            else if(estado == false && "7".equals(ingreso)){
+                 System.exit(0);
             }
             else{
                switch(ingreso){
                 case "1":
-                    if(radio1.isEstadoRadio() == true){
+                    if(estado == true){
                         System.out.println("El radio ya esta encendido.");
                         break;
                     }
                     else{
-                        boolean r = radio1.encenderApagar();
-                        if(r == true){
+                        estado = radio1.encenderApagar();
+                        if(estado == true){
                             System.out.println("Radio encendido correctamente.");
                             break;
                         }
@@ -67,8 +75,8 @@ public class manejaRadio {
                     }
                     break;
                 case "2":
-                   boolean frec = radio1.amFm();
-                   if(frec == false){
+                   frecuencia = radio1.amFm();
+                   if(frecuencia == false){
                        System.out.println("Radio en FM.");
                        break;
                    }
@@ -79,8 +87,8 @@ public class manejaRadio {
                    
                 case "3":
                     double emisora = radio1.avanzar();
-                    if(radio1.isFrecuencia() == false){
-                        System.out.println("Sintonizando emisora: " + emisora + " FM");
+                    if(frecuencia == false){ 
+                        System.out.println("Sintonizando emisora: " + df.format(emisora) + " FM");
                         break;
                     }
                     else{
@@ -112,7 +120,7 @@ public class manejaRadio {
                     if(intBton1 != 0){
                         if(intBton1 >= 1 && intBton1 <= 12){
                             String radio = radio1.seleccionar(intBton1);
-                            if(radio1.isFrecuencia() == false){
+                            if(frecuencia == false){
                                  System.out.println(radio);
                                  break;
                             }
@@ -133,13 +141,13 @@ public class manejaRadio {
                     }
                 case "6":
                     
-                    if(radio1.isEstadoRadio() == false){
+                    if(estado == false){
                         System.out.println("El radio ya esta apagado.");
                         break;
                     }
                     else{
-                        boolean r = radio1.encenderApagar();
-                        if(r == false){
+                        estado = radio1.encenderApagar();
+                        if(estado == false){
                             System.out.println("Radio apagado correctamente.");
                             System.out.println("Hasta Luego! turututu");
                             break;
@@ -151,8 +159,6 @@ public class manejaRadio {
                 default:
                     System.out.println("Debes ingresar un valor valido!");
             }
-            
-           
     }
    } 
     }

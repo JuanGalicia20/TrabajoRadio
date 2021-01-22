@@ -5,6 +5,8 @@
  */
 package radio;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author Jonat
@@ -12,22 +14,19 @@ package radio;
 public class radioPrototipo implements Radio {
     private boolean estadoRadio;
     private boolean frecuencia;
-    private double emisoraFM = 87.9; 
+    private double emisoraFM = 87.90; 
     private int emisoraAM = 530;
     private double[] botones = new double[12];
+    DecimalFormat df = new DecimalFormat("###.##");
 
     public radioPrototipo() {
-        this.estadoRadio = false;
-        this.frecuencia = false;
-    }
-
-    @Override
-    public String toString() {
-        return "radioCarro{" + "estadoRadio=" + estadoRadio + '}';
+        this.estadoRadio = true;
+        this.frecuencia = true;
     }
     
     @Override
     public boolean encenderApagar() {
+        
         if(estadoRadio == false){
             estadoRadio = true;
         }
@@ -78,11 +77,11 @@ public class radioPrototipo implements Radio {
     public String guardar(int boton) {
         if(frecuencia == false){
             botones[boton-1] = emisoraFM;
-             return "Se ha guardado la emisora: " + emisoraFM + " en el boton: #"+ (boton);
+             return "Se ha guardado la emisora: " + df.format(emisoraFM) + " en el boton: #"+ (boton);
         }
         else{
             botones[boton-1] = emisoraAM;
-            return "Se ha guardado la emisora: " + emisoraAM + " en el boton: #"+ (boton);
+            return "Se ha guardado la emisora: " + emisoraAM + " en el boton: #"+ (boton );
         }
        
     }
@@ -92,36 +91,13 @@ public class radioPrototipo implements Radio {
         if(botones[boton-1]%2 != 0){
             frecuencia = false;
             emisoraFM = botones[boton-1];
-            return "Sintonizando " + emisoraFM;
+            return "Sintonizando: " + df.format(emisoraFM) + " FM";
         }
         else{
             frecuencia = true;
             emisoraAM = (int)Math.round(botones[boton-1]);
-            return "Sintonizando " + emisoraAM;
+            return "Sintonizando: " + emisoraAM + " AM";
         }
         
     }
-
-    public boolean isEstadoRadio() {
-        return estadoRadio;
-    }
-
-    public boolean isFrecuencia() {
-        return frecuencia;
-    }
-
-    public double getEmisoraFM() {
-        return emisoraFM;
-    }
-
-    public int getEmisoraAM() {
-        return emisoraAM;
-    }
-
-    public double[] getBotones() {
-        return botones;
-    }
-    
-    
-    
 }
