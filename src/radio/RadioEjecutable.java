@@ -10,12 +10,19 @@ import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Jonat
+ * Programa de simulacion de radio
+ * Algoritmos y Estructuras de datos
+ * @author Jonathan Espinoza & Juan Andres Galicia
+ * @version 21/01/22
  */
 public class RadioEjecutable {
     private static Radio radio1;
     
+    /**
+     * 
+     * @param numero
+     * @return 
+     */
     public static int checkNumerico(String numero){
     int resultado = 0; //Valor predeterminado 0
     try{
@@ -45,7 +52,7 @@ public class RadioEjecutable {
             System.out.print("-----------------Radio-----------------"
                         +"\n 1. Encender radio."+
                         "\n 2. Cambiar AM a FM o FM a AM."+
-                        "\n 3. Avanzar en el dial de 3las emisoras."+
+                        "\n 3. Avanzar en el dial de las emisoras."+
                         "\n 4. Guardar una emisora en uno de los 12 botones."+
                         "\n 5. Seleccionar la emisora puesta en un botón."+
                         "\n 6. Apagar Radio. "+

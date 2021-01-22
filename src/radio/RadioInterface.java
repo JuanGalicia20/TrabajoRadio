@@ -6,8 +6,10 @@
 package radio;
 
 /**
- *
- * @author Jonat
+ * Programa de simulacion de radio
+ * Algoritmos y Estructuras de datos
+ * @author Jonathan Espinoza & Juan Andres Galicia
+ * @version 21/01/22
  */
 public interface RadioInterface {
     public boolean encenderApagar();

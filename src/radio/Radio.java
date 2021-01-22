@@ -8,8 +8,10 @@ package radio;
 import java.text.DecimalFormat;
 
 /**
- *
- * @author Jonat
+ * Programa de simulacion de radio
+ * Algoritmos y Estructuras de datos
+ * @author Jonathan Espinoza & Juan Andres Galicia
+ * @version 21/01/22
  */
 public class Radio implements RadioInterface {
     private boolean estadoRadio;
@@ -19,6 +21,9 @@ public class Radio implements RadioInterface {
     private double[] botones = new double[12];
     DecimalFormat df = new DecimalFormat("###.##");
 
+    /**
+     * 
+     */
     public Radio() {
         this.estadoRadio = true;
         this.frecuencia = true;
