@@ -10,14 +10,13 @@ import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 
 /**
- * Programa de simulacion de radio
- * Algoritmos y Estructuras de datos
- * @author Jonathan Espinoza & Juan Andres Galicia
- * @version 21/01/22
+ *
+ * @author Jonathan Espinoza - 20022
+ * @author Juan Andres Galicia - 20298
+ * @version 1.0 - 2021/22/1
  */
 public class RadioEjecutable {
     private static Radio radio1;
-    
     /**
      * 
      * @param numero
@@ -39,14 +38,16 @@ public class RadioEjecutable {
     return resultado;
     }
     /**
-     * @param args the command line arguments
+     * @param args 
      */
     public static void main(String[] args) {
+       //variables
        radio1 = new Radio();
        boolean estado = radio1.encenderApagar();
        boolean frecuencia = radio1.amFm();
        DecimalFormat df = new DecimalFormat("###.##");
-        
+       
+       //ciclo para impresion 
        boolean keep = true;
        while (keep == true){ 
             System.out.print("-----------------Radio-----------------"
@@ -67,6 +68,7 @@ public class RadioEjecutable {
             }
             else{
                switch(ingreso){
+                //caso 1, encender la radio
                 case "1":
                     if(estado == true){
                         System.out.println("El radio ya esta encendido.");
@@ -82,6 +84,7 @@ public class RadioEjecutable {
                     }
                     break;
                 case "2":
+                   //caso 2, cambiar la frecuencia
                    frecuencia = radio1.amFm();
                    if(frecuencia == false){
                        System.out.println("Radio en FM.");
@@ -93,6 +96,7 @@ public class RadioEjecutable {
                    }
                    
                 case "3":
+                    //Caso 3, sintonizar otra estacion 
                     double emisora = radio1.avanzar();
                     if(frecuencia == false){ 
                         System.out.println("Sintonizando emisora: " + df.format(emisora) + " FM");
@@ -103,6 +107,7 @@ public class RadioEjecutable {
                         break;
                     }
                 case "4":
+                    //caso 4, guardar emisora en un boton
                     String bton = JOptionPane.showInputDialog("Ingrese el numero de boton en el que desea guardar la emisora: ");
                     int intBton = checkNumerico(bton);
                     if(intBton != 0){
@@ -122,6 +127,7 @@ public class RadioEjecutable {
                         break;
                     }
                 case "5":
+                    //caso 5, seleccionar la emisora de un boton 
                     String bton1 = JOptionPane.showInputDialog("Ingrese el numero de boton que desea seleccionar: ");
                     int intBton1 = checkNumerico(bton1);
                     if(intBton1 != 0){
@@ -147,7 +153,7 @@ public class RadioEjecutable {
                         break;
                     }
                 case "6":
-                    
+                    //Apagar la radio
                     if(estado == false){
                         System.out.println("El radio ya esta apagado.");
                         break;
@@ -162,6 +168,7 @@ public class RadioEjecutable {
                  
                     }
                 case "7":
+                    //Salir
                     System.exit(0);
                 default:
                     System.out.println("Debes ingresar un valor valido!");

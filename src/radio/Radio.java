@@ -8,10 +8,10 @@ package radio;
 import java.text.DecimalFormat;
 
 /**
- * Programa de simulacion de radio
- * Algoritmos y Estructuras de datos
- * @author Jonathan Espinoza & Juan Andres Galicia
- * @version 21/01/22
+ *
+ * @author Jonathan Espinoza - 20022
+ * @author Juan Andres Galicia - 20298
+ * @version 1.0 - 2021/22/1
  */
 public class Radio implements RadioInterface {
     private boolean estadoRadio;
@@ -28,10 +28,13 @@ public class Radio implements RadioInterface {
         this.estadoRadio = true;
         this.frecuencia = true;
     }
-    
+    /**
+     * 
+     * @return 
+     */
     @Override
     public boolean encenderApagar() {
-        
+        //Cambiar de falso a verdadero o viceversa
         if(estadoRadio == false){
             estadoRadio = true;
         }
@@ -40,7 +43,10 @@ public class Radio implements RadioInterface {
         }
         return estadoRadio;
     }
-
+    /**
+     * 
+     * @return 
+     */
     @Override
     public boolean amFm() {
         //false = fm
@@ -53,9 +59,13 @@ public class Radio implements RadioInterface {
         }
         return frecuencia;
     }
-
+    /**
+     * 
+     * @return 
+     */
     @Override
     public double avanzar() {
+        //Avanzar entre las emisoras dependiendo de la frecuencia
         if(frecuencia == false){
            if(emisoraFM >= 87.9 && emisoraFM < 107.9){
                emisoraFM = emisoraFM + 0.2;
@@ -77,9 +87,14 @@ public class Radio implements RadioInterface {
             return emisoraAM;
         }
     }
-
+    /**
+     * 
+     * @param boton
+     * @return 
+     */
     @Override
     public String guardar(int boton) {
+        //Guardar una sintonia dentro de el arreglo de botones
         if(frecuencia == false){
             botones[boton-1] = emisoraFM;
              return "Se ha guardado la emisora: " + df.format(emisoraFM) + " en el boton: #"+ (boton);
@@ -90,9 +105,14 @@ public class Radio implements RadioInterface {
         }
        
     }
-
+    /**
+     * 
+     * @param boton
+     * @return 
+     */
     @Override
     public String seleccionar(int boton) {
+        //Seleccionar entre las emisoras de los botones favoritos
         if(botones[boton-1]%2 != 0){
             frecuencia = false;
             emisoraFM = botones[boton-1];
