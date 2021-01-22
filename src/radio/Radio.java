@@ -5,14 +5,99 @@
  */
 package radio;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author Jonat
  */
-public interface Radio {
-    public boolean encenderApagar();
-    public boolean amFm();
-    public double avanzar();
-    public String guardar(int boton);
-    public String seleccionar(int boton);
+public class Radio implements RadioInterface {
+    private boolean estadoRadio;
+    private boolean frecuencia;
+    private double emisoraFM = 87.90; 
+    private int emisoraAM = 530;
+    private double[] botones = new double[12];
+    DecimalFormat df = new DecimalFormat("###.##");
+
+    public Radio() {
+        this.estadoRadio = true;
+        this.frecuencia = true;
+    }
+    
+    @Override
+    public boolean encenderApagar() {
+        
+        if(estadoRadio == false){
+            estadoRadio = true;
+        }
+        else{
+            estadoRadio = false;
+        }
+        return estadoRadio;
+    }
+
+    @Override
+    public boolean amFm() {
+        //false = fm
+        //true = am
+        if(frecuencia == false){
+            frecuencia = true;
+        }
+        else{
+            frecuencia = false;
+        }
+        return frecuencia;
+    }
+
+    @Override
+    public double avanzar() {
+        if(frecuencia == false){
+           if(emisoraFM >= 87.9 && emisoraFM < 107.9){
+               emisoraFM = emisoraFM + 0.2;
+               
+           }
+           else if(emisoraFM >= 107.9){
+               emisoraFM = 87.9;
+            
+           }
+           return emisoraFM;
+        }
+        else{
+            if(emisoraAM >= 530 && emisoraAM < 1610){
+                emisoraAM = emisoraAM + 10;
+            }
+            else if (emisoraAM >= 1610){
+                emisoraAM = 530;
+            }
+            return emisoraAM;
+        }
+    }
+
+    @Override
+    public String guardar(int boton) {
+        if(frecuencia == false){
+            botones[boton-1] = emisoraFM;
+             return "Se ha guardado la emisora: " + df.format(emisoraFM) + " en el boton: #"+ (boton);
+        }
+        else{
+            botones[boton-1] = emisoraAM;
+            return "Se ha guardado la emisora: " + emisoraAM + " en el boton: #"+ (boton );
+        }
+       
+    }
+
+    @Override
+    public String seleccionar(int boton) {
+        if(botones[boton-1]%2 != 0){
+            frecuencia = false;
+            emisoraFM = botones[boton-1];
+            return "Sintonizando: " + df.format(emisoraFM) + " FM";
+        }
+        else{
+            frecuencia = true;
+            emisoraAM = (int)Math.round(botones[boton-1]);
+            return "Sintonizando: " + emisoraAM + " AM";
+        }
+        
+    }
 }
