@@ -16,6 +16,7 @@ class saveTest {
 	void test() {
         Radio testGuardar = new Radio();
         testGuardar.encenderApagar();
+        testGuardar.amFm();
         String avanzar = testGuardar.guardar(1);
         assertEquals("Se ha guardado la emisora: 87.9 en el boton: #1",avanzar);
 	}
